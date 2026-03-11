@@ -8,7 +8,8 @@
     - commands: 
         - `ctrl + shift + p`:command
         - `ctrl + p`:go to file
-- [ ] node
+- [x] node
     - install nvm
     - install nodejs
     - install pnpm
+
