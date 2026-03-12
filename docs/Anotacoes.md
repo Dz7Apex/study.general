@@ -31,5 +31,6 @@
 > - stage do git: são como livros selecionados
 > - commit do git: são como livros que foram empacotados dentro de uma caixa, mas, essa e outras caixas (commits) ainda estão no mesmo local que foram embalados. para que as caixas cheguem ao destinatario é necessário executar o comando `git push`
 > - push do git: representa a ação de enviar todas as caixas (commits) para um destino
-> - cd: significa Change Directory (mudar de diretório)
+> - cd: significa: Change Directory (mudar de diretório)
 > - cada mudança vira um commit
+> - npm significa: Node Package Manager. ele serve para: instalar bibliotecas, criar projetos, rodar scripts | exemplo: `npm install react` instala o React.
