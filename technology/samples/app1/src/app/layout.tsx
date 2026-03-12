@@ -1,25 +1,31 @@
-// src/app/layout.tsx
-import type { Metadata } from "next";
-import { Inter, Cinzel } from "next/font/google"; // Importe Cinzel
 import "./globals.css";
+import type { Metadata } from "next";
+import { Playfair_Display, Lato } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
-const cinzel = Cinzel({ subsets: ["latin"], variable: '--font-cinzel' }); // Configure Cinzel
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+});
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lato",
+});
 
 export const metadata: Metadata = {
-  title: "Diablo Immortal - App1 Sample",
-  description: "Explore os segredos de Sanctuary no seu navegador.",
+  title: "Panis Artis",
+  description: "Padaria artesanal",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="pt-BR">
-      {/* Adicione a classe da variável da fonte aqui */}
-      <body className={`${inter.variable} ${cinzel.variable} antialiased`}>
+      <body className={`${playfair.variable} ${lato.variable}`}>
         {children}
       </body>
     </html>

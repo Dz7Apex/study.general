@@ -1,223 +1,205 @@
 import React from 'react';
-import { Flame, Sword, Skull, Gem, ShieldAlert, Zap } from 'lucide-react';
+import { Coffee, Utensils, Clock, MapPin, Instagram, Facebook, ChevronRight, Star } from 'lucide-react';
 
-// --- Subcomponentes para organização ---
+// --- Subcomponentes ---
 
-// Card de Feature com temática sombria e borda rúnica
-const ClassCard = ({ icon: Icon, title, description, bgImage }: { icon: any, title: string, description: string, bgImage: string }) => (
-  <div className="group relative overflow-hidden rounded-lg border border-red-950/50 bg-[#0d0d0d] transition-all duration-500 hover:border-red-600/50 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-900/20">
-    {/* Imagem de fundo sutil no hover */}
-    <div 
-      className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500 bg-cover bg-center"
-      style={{ backgroundImage: `url(${bgImage})` }}
-    />
-    
-    <div className="relative p-8 z-10">
-      <div className="w-16 h-16 flex items-center justify-center rounded-full border-2 border-red-950 bg-[#0a0a0a] text-red-500 mb-6 group-hover:scale-110 group-hover:border-red-700/50 group-hover:shadow-lg group-hover:shadow-red-900/50 transition-all duration-300">
-        <Icon size={32} strokeWidth={1.5} />
+const ProductCard = ({ title, price, description, image }: { title: string, price: string, description: string, image: string }) => (
+  <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-[#eaddcf]">
+    <div className="h-64 overflow-hidden relative">
+      <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[#8b5e34] font-bold shadow-sm">
+        {price}
       </div>
-      <h3 className="font-cinzel text-2xl font-bold mb-3 tracking-wider text-gray-100 group-hover:text-red-400 transition-colors">{title}</h3>
-      <p className="font-inter text-gray-400 leading-relaxed text-sm">
-        {description}
-      </p>
     </div>
-    
-    {/* Efeito de brilho rúnico na borda inferior */}
-    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-red-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+    <div className="p-8">
+      <h3 className="font-playfair text-2xl text-[#4a3728] mb-2">{title}</h3>
+      <p className="text-[#6d5c4e] leading-relaxed text-sm mb-4">{description}</p>
+      <button className="text-[#8b5e34] font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+        Encomendar <ChevronRight size={16} />
+      </button>
+    </div>
   </div>
 );
 
-// Botão Primário Estilo "Sangue e Ouro"
-const DiabloButtonPrimary = ({ children, icon: Icon }: { children: React.ReactNode, icon?: any }) => (
-  <button className="relative px-8 py-4 font-cinzel font-bold text-lg tracking-widest text-yellow-100 overflow-hidden group transition-all duration-300 bg-gradient-to-b from-red-700 via-red-950 to-red-700 hover:from-red-600 hover:via-red-900 hover:to-red-600 shadow-lg shadow-black/50 border border-yellow-600/20">
-    {/* Brilho interno */}
-    <span className="absolute inset-0 w-full h-full bg-black/30 group-hover:bg-transparent transition-colors"></span>
-    {/* Borda decorativa */}
-    <span className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-yellow-400"></span>
-    <span className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-yellow-400"></span>
-    <span className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-yellow-400"></span>
-    <span className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-yellow-400"></span>
-    
-    <span className="relative z-10 flex items-center justify-center gap-3">
-      {Icon && <Icon size={20} className="text-yellow-200" />}
-      {children}
-    </span>
-  </button>
-);
-
-// Botão Secundário Estilo "Ferro Velho"
-const DiabloButtonSecondary = ({ children }: { children: React.ReactNode }) => (
-  <button className="relative px-8 py-4 font-cinzel font-bold text-lg tracking-widest text-gray-300 overflow-hidden group transition-all duration-300 bg-[#1a1a1a] hover:bg-[#2a2a2a] border border-gray-700 hover:border-gray-500 shadow-md shadow-black/50">
-     <span className="relative z-10 flex items-center justify-center gap-3">
-      {children}
-    </span>
-  </button>
-);
-
-
-export default function DiabloLandingPage() {
+export default function BakeryLandingPage() {
   return (
-    // Fundo preto profundo com textura de ruído sutil
-    <div className="min-h-screen bg-[#050505] text-gray-300 font-inter selection:bg-red-900/50 overflow-x-hidden">
+    <div className="min-h-screen bg-[#faf7f2] text-[#4a3728] selection:bg-[#d4a373]/30">
       
-      {/* OVERLAY DE NÉVOA/FUMAÇA (Efeito imersivo) */}
-      <div className="fixed inset-0 pointer-events-none z-0 opacity-30">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-dotted-2.png')] opacity-50"></div>
-        <div className="absolute top-0 left-1/4 w-full h-full bg-red-950/10 blur-[150px] animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-full h-full bg-black blur-[150px]"></div>
-      </div>
-
-      {/* Navegação Gótica Minimalista */}
-      <nav className="relative z-20 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto border-b border-red-950/30 bg-[#050505]/80 backdrop-blur-sm">
-        <div className="font-cinzel text-3xl font-bold tracking-tighter bg-gradient-to-b from-yellow-100 via-yellow-400 to-yellow-100 bg-clip-text text-transparent hover:from-white hover:to-white transition transition-all duration-500 hover:scale-105 cursor-pointer">
-          DIABLO<span className="font-light text-red-600">IMMORTAL</span>
+      {/* Navegação */}
+      <nav className="fixed w-full z-50 bg-[#faf7f2]/80 backdrop-blur-md border-b border-[#eaddcf]">
+        <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+          <div className="font-playfair text-2xl font-black text-[#634832] tracking-tight">
+            PANIS<span className="text-[#d4a373]">ARTIS</span>
+          </div>
+          <div className="hidden md:flex gap-8 font-medium text-sm text-[#6d5c4e]">
+            <a href="#produtos" className="hover:text-[#d4a373] transition">Produtos</a>
+            <a href="#sobre" className="hover:text-[#d4a373] transition">Nossa História</a>
+            <a href="#contato" className="hover:text-[#d4a373] transition">Contato</a>
+          </div>
+          <button className="bg-[#634832] text-[#faf7f2] px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[#4a3728] transition-all shadow-lg shadow-brown-900/20">
+            Peça Online
+          </button>
         </div>
-        <div className="hidden md:flex gap-8 font-cinzel text-sm font-medium tracking-widest text-gray-400">
-          <a href="#" className="hover:text-red-400 transition">Classes</a>
-          <a href="#" className="hover:text-red-400 transition">Mundo</a>
-          <a href="#" className="hover:text-red-400 transition">Atualizações</a>
-        </div>
-        <button className="font-cinzel font-bold text-sm tracking-widest px-6 py-2 border-2 border-yellow-700 text-yellow-200 bg-transparent hover:bg-yellow-700/20 transition group relative overflow-hidden">
-           Jogue Agora
-           <span className="absolute inset-0 w-1/2 h-full bg-white/5 skew-x-12 -translate-x-full group-hover:translate-x-[200%] transition-transform duration-500"></span>
-        </button>
       </nav>
 
-      <main className="relative z-10">
-        {/* HERO SECTION - O Portal para o Inferno */}
-        <section className="relative pt-24 pb-40 overflow-hidden border-b-4 border-black shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
-          {/* Imagem de Fundo Hero (Sombria) */}
-          <div className="absolute inset-0 -z-10 bg-black">
+      <main>
+        {/* HERO SECTION */}
+        <section className="relative h-screen flex items-center pt-20">
+          <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.blizzard.com/diabloimmortal/variants/wallpapers/wallpapers-skarn-thumnail.jpg" 
-              alt="Skarn, o Arauto do Terror" 
-              className="w-full h-full object-cover object-center opacity-30 blur-[2px]"
+              src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop" 
+              className="w-full h-full object-cover opacity-20"
+              alt="Fundo padaria"
             />
-            {/* Gradiente para misturar com o fundo */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/80 to-[#050505]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]" />
-          </div>
-          
-          <div className="max-w-7xl mx-auto px-8 text-center relative">
-            {/* Distintivo Rúnico */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border-2 border-red-700 bg-black/80 text-red-300 font-cinzel text-xs font-bold tracking-widest mb-10 shadow-lg shadow-red-950/50">
-              <Skull size={14} className="text-red-500 animate-pulse" />
-            
-              Sample App1: Sanctuary Edition
-            </div>
-            
-            <h1 className="font-cinzel text-6xl md:text-8xl font-bold tracking-tight mb-10 leading-none">
-              <span className="block text-gray-100 drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)]">Enfrente o</span>
-              <span className="block bg-gradient-to-b from-red-500 via-red-800 to-black bg-clip-text text-transparent drop-shadow-[0_5px_15px_rgba(255,0,0,0.5)]">
-                Terror Ancestral
-              </span>
-            </h1>
-            
-            <p className="font-inter max-w-3xl mx-auto text-xl text-gray-400 mb-16 leading-relaxed drop-shadow-md">
-              A Pedra do Mundo foi estilhaçada. Skarn, o Senhor da Condenação, busca os fragmentos para ressuscitar Diablo. O destino de Sanctuary está nas suas mãos, Nephalem. Prepare-se para o combate no seu App1.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <DiabloButtonPrimary icon={Flame}>
-                Crie seu Herói
-              </DiabloButtonPrimary>
-              <DiabloButtonSecondary>
-                Explore a Lore
-              </DiabloButtonSecondary>
-            </div>
-          </div>
-        </section>
-
-        {/* CLASSES/FEATURES GRID - O Caminho do Guerreiro */}
-        <section className="relative max-w-7xl mx-auto px-8 py-32">
-          {/* Título da Seção Gótica */}
-          <div className="text-center mb-20 relative">
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 w-60 h-1 bg-gradient-to-r from-transparent via-red-800 to-transparent"></div>
-            <h2 className="font-cinzel text-5xl font-bold tracking-widest text-gray-100 pt-8 mb-4">Escolha seu Destino</h2>
-            <p className="font-inter text-gray-500 text-lg">Seis classes icônicas. Uma batalha sem fim.</p>
-             <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-60 h-1 bg-gradient-to-r from-transparent via-red-800 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#faf7f2] via-[#faf7f2]/80 to-transparent" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-            <ClassCard 
-              icon={Sword}
-              title="Bárbaro"
-              description="Um guerreiro feroz que domina o combate corpo a corpo com força bruta e fúria incontrolável."
-              bgImage="https://images.blizzard.com/diabloimmortal/variants/home/classes/barbarian-concept.jpg"
-            />
-            <ClassCard 
-              icon={Zap}
-              title="Arcanista"
-              description="Manipula as forças arcanas para conjurar feitiços devastadores de longo alcance, controlando o tempo e o espaço."
-              bgImage="https://images.blizzard.com/diabloimmortal/variants/home/classes/wizard-concept.jpg"
-            />
-            <ClassCard 
-              icon={ShieldAlert}
-              title="Cruzado"
-              description="Um guerreiro sagrado blindado que usa a fé como arma e escudo, liderando a investida contra o mal."
-              bgImage="https://images.blizzard.com/diabloimmortal/variants/home/classes/crusader-concept.jpg"
-            />
-            <ClassCard 
-              icon={Skull}
-              title="Necromante"
-              description="Mestre sobre a vida e a morte, evoca exércitos de mortos-vivos e usa magias de sangue e osso."
-              bgImage="https://images.blizzard.com/diabloimmortal/variants/home/classes/necromancer-concept.jpg"
-            />
-            <ClassCard 
-              icon={Flame}
-              title="Caçador de Demônios"
-              description="Um vingador implacável que usa bestas e dispositivos táticos para eliminar demônios à distância."
-              bgImage="https://images.blizzard.com/diabloimmortal/variants/home/classes/demon-hunter-concept.jpg"
-            />
-            <ClassCard 
-              icon={Gem}
-              title="Monge"
-              description="Um guerreiro ágil que canaliza a energia divina em golpes rápidos e artes marciais letais."
-              bgImage="https://images.blizzard.com/diabloimmortal/variants/home/classes/monk-concept.jpg"
-            />
-          </div>
-        </section>
-
-        {/* CTA FINAL - O Chamado das Sombras */}
-        <section className="relative py-40 border-t-4 border-black bg-[#080808]">
-           {/* Imagem de Fundo Final */}
-          <div className="absolute inset-0 -z-10">
-            <img 
-              src="https://images.blizzard.com/diabloimmortal/variants/home/bg-di-map.jpg" 
-              alt="Mapa de Sanctuary" 
-              className="w-full h-full object-cover object-center opacity-20 blur-[1px]"
-            />
-             <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-transparent to-[#080808]" />
-          </div>
-
-          <div className="max-w-4xl mx-auto px-8 text-center relative z-10">
-            <div className="relative p-16 rounded-xl border-2 border-red-950/70 bg-[#0a0a0a]/90 backdrop-blur-sm shadow-[0_0_60px_rgba(130,0,0,0.3)]">
-                {/* Efeito Rúnico de Canto */}
-                <span className="absolute -top-4 -left-4 text-4xl text-red-900 opacity-60">ᛦ</span>
-                <span className="absolute -top-4 -right-4 text-4xl text-red-900 opacity-60">ᚱ</span>
-                <span className="absolute -bottom-4 -left-4 text-4xl text-red-900 opacity-60">ᚻ</span>
-                <span className="absolute -bottom-4 -right-4 text-4xl text-red-900 opacity-60">ᛥ</span>
-
-              <h2 className="font-cinzel text-5xl font-bold tracking-widest mb-8 text-gray-100 drop-shadow-[0_2px_5px_rgba(255,0,0,0.4)]">
-                Sanctuary clama por você
-              </h2>
-              <p className="font-inter text-gray-400 mb-12 text-xl leading-relaxed">
-                A batalha entre o Paraíso Celestial e o Inferno Ardente continua. Não deixe que as trevas consumam tudo. Atualize o arquivo <code className="font-mono bg-red-950/50 text-red-200 px-2 py-1 rounded border border-red-900">src/app/page.tsx</code> e comece sua jornada.
+          <div className="relative z-10 max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#d4a373]/10 text-[#8b5e34] text-xs font-bold tracking-widest uppercase mb-6 border border-[#d4a373]/20">
+                <Clock size={14} /> Fornada quente a cada 30 min
+              </div>
+              <h1 className="font-playfair text-6xl md:text-8xl font-bold leading-[1.1] mb-8 text-[#4a3728]">
+                Onde o tempo <br /> 
+                <span className="text-[#d4a373] italic text-5xl md:text-7xl">vira sabor.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-[#6d5c4e] mb-10 max-w-lg leading-relaxed">
+                Pães de fermentação natural, feitos com farinha orgânica e o carinho que só uma produção artesanal oferece.
               </p>
-              <DiabloButtonPrimary icon={Sword}>
-                Baixe o Cliente App1
-              </DiabloButtonPrimary>
+              <div className="flex gap-4">
+                <button className="bg-[#634832] text-white px-8 py-4 rounded-full font-bold shadow-xl hover:bg-[#4a3728] transition-all scale-105">
+                  Ver Cardápio
+                </button>
+                <button className="border-2 border-[#634832] text-[#634832] px-8 py-4 rounded-full font-bold hover:bg-[#634832] hover:text-white transition-all">
+                  Conheça a Padaria
+                </button>
+              </div>
+            </div>
+            <div className="hidden lg:block relative">
+               <div className="w-[500px] h-[500px] rounded-full overflow-hidden border-[16px] border-white shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-700">
+                  <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1926&auto=format&fit=crop" alt="Pão Artesanal" className="w-full h-full object-cover" />
+               </div>
+               <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-2xl shadow-xl border border-[#eaddcf] animate-bounce-slow">
+                  <div className="flex gap-1 text-yellow-500 mb-2">
+                    {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                  </div>
+                  <p className="font-bold text-[#4a3728]">O melhor Sourdough da cidade!</p>
+                  <p className="text-xs text-gray-500">— Cliente satisfeito</p>
+               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* PRODUTOS */}
+        <section id="produtos" className="max-w-7xl mx-auto px-8 py-32">
+          <div className="text-center mb-20">
+            <h2 className="font-playfair text-5xl font-bold mb-4">Nossas Delícias</h2>
+            <div className="w-24 h-1 bg-[#d4a373] mx-auto mb-6"></div>
+            <p className="text-[#6d5c4e]">Feitos diariamente com ingredientes selecionados</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <ProductCard 
+              title="Sourdough Tradicional"
+              price="R$ 28,00"
+              description="Fermentação de 48h, casca crocante e miolo aerado com sabor levemente ácido."
+              image="https://images.unsplash.com/photo-1585478259715-876a6a81bc31?q=80&w=1000&auto=format&fit=crop"
+            />
+            <ProductCard 
+              title="Croissant Francês"
+              price="R$ 14,00"
+              description="Laminado com manteiga pura, resultando em camadas leves e folhadas impossíveis de resistir."
+              image="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1000&auto=format&fit=crop"
+            />
+            <ProductCard 
+              title="Eclair de Chocolate"
+              price="R$ 18,00"
+              description="Massa choux recheada com creme de chocolate belga e cobertura espelhada."
+              image="https://images.unsplash.com/photo-1621236304195-06bb1d00bab8?q=80&w=1000&auto=format&fit=crop"
+            />
+          </div>
+        </section>
+
+        {/* SOBRE A PADARIA */}
+        <section id="sobre" className="bg-[#634832] text-[#faf7f2] py-32 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-20 items-center">
+            <div className="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=1000&auto=format&fit=crop" 
+                alt="Nosso processo" 
+                className="rounded-3xl shadow-2xl relative z-10"
+              />
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#d4a373] rounded-full -z-0 opacity-20 blur-2xl"></div>
+            </div>
+            <div>
+              <h2 className="font-playfair text-5xl font-bold mb-8 italic">Tradição que se amassa à mão</h2>
+              <div className="space-y-6 text-[#eaddcf] leading-relaxed">
+                <p>Nossa história começou no pequeno forno da bisavó Maria, onde aprendemos que o segredo do pão perfeito não é a receita, mas a paciência.</p>
+                <p>Hoje, unimos técnicas ancestrais de panificação com grãos selecionados para trazer à sua mesa um produto que respeita o tempo da natureza.</p>
+              </div>
+              <div className="grid grid-cols-2 gap-8 mt-12">
+                <div>
+                  <div className="text-[#d4a373] mb-2"><Utensils size={32} /></div>
+                  <h4 className="font-bold text-lg">100% Artesanal</h4>
+                  <p className="text-sm text-[#eaddcf]">Sem conservantes ou misturas prontas.</p>
+                </div>
+                <div>
+                  <div className="text-[#d4a373] mb-2"><Coffee size={32} /></div>
+                  <h4 className="font-bold text-lg">Grãos Nobres</h4>
+                  <p className="text-sm text-[#eaddcf]">Café torrado semanalmente para você.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CONTATO E LOCALIZAÇÃO */}
+        <section id="contato" className="max-w-7xl mx-auto px-8 py-32">
+          <div className="bg-white rounded-[3rem] p-12 md:p-20 shadow-xl border border-[#eaddcf] flex flex-col md:flex-row gap-16">
+            <div className="flex-1">
+              <h2 className="font-playfair text-4xl font-bold mb-6 italic text-[#634832]">Venha nos visitar</h2>
+              <p className="text-[#6d5c4e] mb-10 text-lg">O cheiro de pão novo está te esperando. Confira nossos horários e localização.</p>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-[#faf7f2] rounded-xl text-[#d4a373]"><MapPin /></div>
+                  <div>
+                    <h5 className="font-bold">Endereço</h5>
+                    <p className="text-[#6d5c4e]">Rua das Farinhas, 123 - Bairro Doce, Cachoeiro</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-[#faf7f2] rounded-xl text-[#d4a373]"><Clock /></div>
+                  <div>
+                    <h5 className="font-bold">Horário de Funcionamento</h5>
+                    <p className="text-[#6d5c4e]">Terça a Sábado: 07:00 – 19:00</p>
+                    <p className="text-[#6d5c4e]">Domingo: 08:00 – 13:00</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4 mt-10">
+                <a href="#" className="p-4 bg-[#634832] text-white rounded-full hover:bg-[#d4a373] transition-colors"><Instagram /></a>
+                <a href="#" className="p-4 bg-[#634832] text-white rounded-full hover:bg-[#d4a373] transition-colors"><Facebook /></a>
+              </div>
+            </div>
+            
+            <div className="flex-1 bg-[#faf7f2] rounded-3xl p-8 border border-[#eaddcf]">
+              <h3 className="font-playfair text-2xl font-bold mb-6">Mande uma mensagem</h3>
+              <form className="space-y-4 text-sm">
+                <input type="text" placeholder="Seu nome" className="w-full p-4 rounded-xl border border-[#eaddcf] focus:outline-none focus:ring-2 focus:ring-[#d4a373] bg-white" />
+                <input type="email" placeholder="Seu e-mail" className="w-full p-4 rounded-xl border border-[#eaddcf] focus:outline-none focus:ring-2 focus:ring-[#d4a373] bg-white" />
+                <textarea placeholder="No que podemos ajudar?" rows={4} className="w-full p-4 rounded-xl border border-[#eaddcf] focus:outline-none focus:ring-2 focus:ring-[#d4a373] bg-white"></textarea>
+                <button className="w-full py-4 bg-[#634832] text-white font-bold rounded-xl hover:bg-[#4a3728] transition-all">Enviar Mensagem</button>
+              </form>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Footer Profundo */}
-      <footer className="relative z-10 py-16 border-t border-red-950/30 bg-[#030303] text-center text-gray-600 font-inter text-sm">
-        <div className="font-cinzel text-xl font-bold tracking-widest text-gray-500 mb-4">DIABLO IMMORTAL LAB</div>
-        <p>&copy; 2026 App1. Este é um projeto de estudo sample.</p>
-        <p className="mt-2 text-xs">Diablo Immortal e Blizzard Entertainment são marcas registradas.</p>
-        <div className="mt-6 w-32 h-1 bg-gradient-to-r from-transparent via-red-950 to-transparent mx-auto"></div>
+      <footer className="py-12 text-center text-[#6d5c4e] border-t border-[#eaddcf]">
+        <p className="font-playfair font-bold text-xl mb-2">Panis Artis</p>
+        <p className="text-sm opacity-70">© 2026 Todos os direitos reservados. Feito com amor e fermento.</p>
       </footer>
     </div>
   );
