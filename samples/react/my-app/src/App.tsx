@@ -1,35 +1,138 @@
-import './App.css'
+import { useEffect, useState } from "react";
 
-function App() {
+export default function App() {
+  const GAME_HEIGHT = 400;
+  const GAME_WIDTH = 300;
+
+  const PIPE_WIDTH = 60;
+  const GAP = 130;
+
+  const [birdY, setBirdY] = useState(200);
+  const [velocity, setVelocity] = useState(0);
+
+  const [pipeX, setPipeX] = useState(300);
+  const [pipeGapY, setPipeGapY] = useState(150);
+
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+
+  // gravidade
+  useEffect(() => {
+    const gravity = setInterval(() => {
+      setVelocity((v) => v + 0.5);
+      setBirdY((y) => y + velocity);
+    }, 30);
+
+    return () => clearInterval(gravity);
+  }, [velocity]);
+
+  // mover canos
+  useEffect(() => {
+    const pipes = setInterval(() => {
+      setPipeX((x) => {
+        if (x < -PIPE_WIDTH) {
+          setScore((s) => s + 1);
+          setPipeGapY(Math.random() * 200 + 50);
+          return GAME_WIDTH;
+        }
+        return x - 3;
+      });
+    }, 30);
+
+    return () => clearInterval(pipes);
+  }, []);
+
+  // colisão
+  useEffect(() => {
+    const birdTop = birdY;
+    const birdBottom = birdY + 30;
+
+    const pipeTop = pipeGapY;
+    const pipeBottom = pipeGapY + GAP;
+
+    const hitPipe =
+      pipeX < 120 &&
+      pipeX + PIPE_WIDTH > 80 &&
+      (birdTop < pipeTop || birdBottom > pipeBottom);
+
+    const hitGround = birdY > GAME_HEIGHT || birdY < 0;
+
+    if (hitPipe || hitGround) {
+      setGameOver(true);
+    }
+  }, [birdY, pipeX]);
+
+  // pulo
+  function jump() {
+    if (!gameOver) {
+      setVelocity(-8);
+    }
+  }
+
   return (
-    <>
-      <section id="center">
-        {/* <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div> */}
-        <div className="hero">
-          <img src={"https://panificacao.dispandovale.com.br/imagens/distribuidor-de-manteiga-para-padaria-telefone.jpg"} className="base" width="170" height="179" alt="" />
-        </div>
-        
-        <div>
-          <h1>Padaria do Dz7</h1>
-        </div>
-        <button
-          className="counter"
-          onClick={() => alert("Bem vindo e volte logo! Cheiro! ;* ")}
+    <div
+      onClick={jump}
+      style={{
+        width: GAME_WIDTH,
+        height: GAME_HEIGHT,
+        border: "2px solid black",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* pássaro */}
+      <div
+        style={{
+          position: "absolute",
+          left: 80,
+          top: birdY,
+          width: 30,
+          height: 30,
+          background: "yellow",
+        }}
+      />
+
+      {/* cano de cima */}
+      <div
+        style={{
+          position: "absolute",
+          left: pipeX,
+          top: 0,
+          width: PIPE_WIDTH,
+          height: pipeGapY,
+          background: "green",
+        }}
+      />
+
+      {/* cano de baixo */}
+      <div
+        style={{
+          position: "absolute",
+          left: pipeX,
+          top: pipeGapY + GAP,
+          width: PIPE_WIDTH,
+          height: GAME_HEIGHT,
+          background: "green",
+        }}
+      />
+
+      {/* score */}
+      <div style={{ position: "absolute", top: 10, left: 10 }}>
+        Score: {score}
+      </div>
+
+      {gameOver && (
+        <div
+          style={{
+            position: "absolute",
+            top: "40%",
+            left: "25%",
+            fontSize: 24,
+          }}
         >
-          Clique aqui para entrar no site
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+          Game Over
+        </div>
+      )}
+    </div>
+  );
 }
-
-export default App
