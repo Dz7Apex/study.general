@@ -11,6 +11,7 @@
 
 - Next.js
   - [app1](./samples/nextjs/app1)
+- React
   - [my-app](./samples/react/my-app)
 
 <!-- Exemplo de comentário de código em markdown !("Todo list")[./docs/Todo.md] -->
