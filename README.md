@@ -27,6 +27,13 @@ VSCode:
 
 PNPM:
 - `pnpm i`: Instalar dependências
+
+
+Comentários no typescript:
+- `//`: comenta uma linha
+- `/* */`: comenta um bloco de linhas 
+  - `/*` início de comentário
+  - `*/` fim de comentário
  -->
 
 
