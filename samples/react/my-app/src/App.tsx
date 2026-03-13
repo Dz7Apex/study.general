@@ -14,7 +14,7 @@ function App() {
         </div>
         
         <div>
-          <h1>Padaria do José</h1>
+          <h1>Padaria do Dz7</h1>
         </div>
         <button
           className="counter"
