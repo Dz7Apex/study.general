@@ -11,7 +11,7 @@
 
 - Next.js
   - [app1](./samples/nextjs/app1)
-  - [my-app](./samples/nextjs/my-app)
+  - [my-app](./samples/react/my-app)
 
 <!-- Exemplo de comentário de código em markdown !("Todo list")[./docs/Todo.md] -->
 
@@ -22,6 +22,10 @@
 
 VSCode:
 - Sempre pressionar CTRL + Espaço para sugerir autocomplete
+
+
+PNPM:
+- `pnpm i`: Instalar dependências
  -->
 
 
