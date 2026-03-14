@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Bird from "./components/Bird"
+import Pipe from "./components/Pipe"
 
 export default function App() {
   const GAME_HEIGHT = 400;
@@ -81,40 +83,10 @@ export default function App() {
       }}
     >
       {/* pássaro */}
-      <div
-        style={{
-          position: "absolute",
-          left: 80,
-          top: birdY,
-          width: 30,
-          height: 30,
-          background: "yellow",
-        }}
-      />
+      <Bird y={birdY} />
 
-      {/* cano de cima */}
-      <div
-        style={{
-          position: "absolute",
-          left: pipeX,
-          top: 0,
-          width: PIPE_WIDTH,
-          height: pipeGapY,
-          background: "green",
-        }}
-      />
-
-      {/* cano de baixo */}
-      <div
-        style={{
-          position: "absolute",
-          left: pipeX,
-          top: pipeGapY + GAP,
-          width: PIPE_WIDTH,
-          height: GAME_HEIGHT,
-          background: "green",
-        }}
-      />
+      {/* canos */}
+      <Pipe x={pipeX} gapY={pipeGapY} />
 
       {/* score */}
       <div style={{ position: "absolute", top: 10, left: 10 }}>
