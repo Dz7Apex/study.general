@@ -84,7 +84,14 @@ export default function App() {
       setVelocity(-8);
     }
   }
-
+function restart() {
+  setBirdY(200)
+  setVelocity(0)
+  setPipeX(GAME_WIDTH)
+  setPipeGapY(150)
+  setScore(0)
+  setGameOver(false)
+}
   return (
     <div
       onClick={jump}
@@ -108,17 +115,30 @@ export default function App() {
       </div>
 
       {gameOver && (
-        <div
-          style={{
-            position: "absolute",
-            top: "40%",
-            left: "25%",
-            fontSize: 24,
-          }}
-        >
-          Game Over
-        </div>
-      )}
+  <div
+    style={{
+      position: "absolute",
+      top: "40%",
+      left: "25%",
+      textAlign: "center",
+      fontSize: 24,
+    }}
+  >
+    <div>Game Over</div>
+
+    <button
+      onClick={restart}
+      style={{
+        marginTop: 10,
+        padding: "5px 10px",
+        fontSize: 16,
+        cursor: "pointer",
+      }}
+    >
+      Restart
+    </button>
+  </div>
+)}
     </div>
   );
 }
