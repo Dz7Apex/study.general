@@ -28,6 +28,20 @@ export default function App() {
     return () => clearInterval(gravity);
   }, [velocity]);
 
+  useEffect(() => {
+  function handleKey(event: KeyboardEvent) {
+    if (event.code === "Space") {
+      jump()
+    }
+  }
+
+  window.addEventListener("keydown", handleKey)
+
+  return () => {
+    window.removeEventListener("keydown", handleKey)
+  }
+}, [gameOver])
+
   // mover canos
   useEffect(() => {
     const pipes = setInterval(() => {
